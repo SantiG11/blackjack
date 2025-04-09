@@ -1,0 +1,17 @@
+type Value = "A" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | "J" | "Q" | "K";
+
+type Suit = "Clubs" | "Diamonds" | "Hearts" | "Spades";
+
+type CardType = {
+  suit: Suit;
+  value: Value;
+};
+
+export default function Card({ suit, value }: CardType) {
+  return (
+    <div>
+      <label>{suit}</label>
+      <p>{value}</p>
+    </div>
+  );
+}
