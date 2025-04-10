@@ -1,8 +1,22 @@
-type Value = "A" | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | "J" | "Q" | "K";
+export type Value =
+  | "A"
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | "J"
+  | "Q"
+  | "K";
 
-type Suit = "Clubs" | "Diamonds" | "Hearts" | "Spades";
+export type Suit = "Clubs" | "Diamonds" | "Hearts" | "Spades";
 
-type CardType = {
+export type CardType = {
   suit: Suit;
   value: Value;
 };
