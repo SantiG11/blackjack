@@ -19,6 +19,7 @@ interface CardDeckProps {
 
 export default function CardDeck({ shouldShuffle = true }: CardDeckProps) {
   const [cards, setCards] = useState<CardType[]>([]);
+  const [givenCards, setGivenCards] = useState<CardType[]>([]);
 
   useEffect(() => {
     const initialCards: CardType[] = [];
@@ -34,5 +35,16 @@ export default function CardDeck({ shouldShuffle = true }: CardDeckProps) {
     } else {
       setCards(initialCards);
     }
+
+    const dealCard = () => {
+      if (cards.length > 0) {
+        const lastCard = cards[cards.length - 1]; // Get the last card
+        const remainingCards = cards.slice(0, -1); // Create a new array without the last card
+        setCards(remainingCards);
+        setGivenCards((prevGivenCards) => [...prevGivenCards, lastCard]); // Add to givenCards
+        return lastCard;
+      }
+      return undefined;
+    };
   }, [shouldShuffle]);
 }
