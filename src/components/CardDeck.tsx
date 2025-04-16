@@ -1,9 +1,25 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Suit, Value, CardType } from "./Card";
 
+//All the values and suits of of the cards
 const suits: Suit[] = ["Clubs", "Diamonds", "Hearts", "Spades"];
-const values: Value[] = ["A", 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+const values: Value[] = [
+  "A",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "J",
+  "Q",
+  "K",
+];
 
+//A funcition to shuffle the array of cards
 function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {
@@ -13,38 +29,57 @@ function shuffleArray<T>(array: T[]): T[] {
   return newArray;
 }
 
-interface CardDeckProps {
-  shouldShuffle?: boolean; // The '?' makes it an optional prop
+export interface CardDeckProps {
+  shouldShuffle?: boolean;
 }
 
-export default function CardDeck({ shouldShuffle = true }: CardDeckProps) {
-  const [cards, setCards] = useState<CardType[]>([]);
-  const [givenCards, setGivenCards] = useState<CardType[]>([]);
+// An interface for the methods we want to expose from the CardDeck component.
+export interface CardDeckHandle {
+  dealCard: (arg?: number) => CardType[] | undefined;
+}
 
-  useEffect(() => {
-    const initialCards: CardType[] = [];
-    suits.forEach((cardSuit) => {
-      values.forEach((cardValue) => {
-        initialCards.push({ suit: cardSuit, value: cardValue });
+const CardDeck = forwardRef<CardDeckHandle, CardDeckProps>(
+  ({ shouldShuffle = true }, ref) => {
+    const [cards, setCards] = useState<CardType[]>([]);
+
+    useEffect(() => {
+      const initialCards: CardType[] = [];
+      suits.forEach((cardSuit) => {
+        values.forEach((cardValue) => {
+          initialCards.push({ suit: cardSuit, value: cardValue });
+        });
       });
-    });
 
-    if (shouldShuffle) {
-      const shuffledCards = shuffleArray(initialCards);
-      setCards(shuffledCards);
-    } else {
-      setCards(initialCards);
-    }
-
-    const dealCard = () => {
-      if (cards.length > 0) {
-        const lastCard = cards[cards.length - 1]; // Get the last card
-        const remainingCards = cards.slice(0, -1); // Create a new array without the last card
-        setCards(remainingCards);
-        setGivenCards((prevGivenCards) => [...prevGivenCards, lastCard]); // Add to givenCards
-        return lastCard;
+      if (shouldShuffle) {
+        const shuffledCards = shuffleArray(initialCards);
+        setCards(shuffledCards);
+      } else {
+        setCards(initialCards);
       }
-      return undefined;
+    }, [shouldShuffle]);
+
+    const dealCard = (count: number = 1): CardType[] | undefined => {
+      if (cards.length < count) {
+        console.log("Not enough cards in the deck to deal" + count + "cards.");
+        return undefined;
+      }
+
+      const dealtCards = cards.slice(0, count); // Take the first 'count' cards
+      setCards((prevCards) => prevCards.slice(count)); // Remove the dealt cards from the deck
+      setTimeout(() => {
+        console.log(cards.length - count);
+      }, 99);
+      return dealtCards;
     };
-  }, [shouldShuffle]);
-}
+
+    useImperativeHandle(ref, () => ({
+      dealCard, // Expose the dealCard function directly
+    }));
+
+    return <div style={{ display: "none" }}></div>;
+  }
+);
+
+CardDeck.displayName = "CardDeck";
+
+export default CardDeck;

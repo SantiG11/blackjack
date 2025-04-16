@@ -1,7 +1,12 @@
 import "./App.css";
+import GameTable from "./components/GameTable";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <GameTable />
+    </>
+  );
 }
 
 export default App;
