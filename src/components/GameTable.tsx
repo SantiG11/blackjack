@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import CardDeck, { CardDeckHandle } from "./CardDeck";
 import { CardType } from "./Card";
 import Player from "./Player";
+import Dealer from "./Dealer";
 
 function GameTable() {
   const deckRef = useRef<CardDeckHandle | null>(null);
@@ -65,12 +66,7 @@ function GameTable() {
       </div>
 
       <div>
-        <h3>Dealer Hand:</h3>
-        {dealerHand.map((card, index) => (
-          <div key={index}>
-            {card.suit} - {card.value}
-          </div>
-        ))}
+        <Dealer hand={dealerHand} />
       </div>
     </div>
   );
