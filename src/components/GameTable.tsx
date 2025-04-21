@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import CardDeck, { CardDeckHandle } from "./CardDeck";
 import { CardType } from "./Card";
+import Player from "./Player";
 
 function GameTable() {
   const deckRef = useRef<CardDeckHandle | null>(null);
@@ -45,12 +46,7 @@ function GameTable() {
       <CardDeck ref={deckRef} />
 
       <div>
-        <h3>Player hand:</h3>
-        {playerHand.map((card, index) => (
-          <div key={index}>
-            {card.suit} - {card.value}
-          </div>
-        ))}
+        <Player hand={playerHand} />
         <button
           onClick={() => {
             hitPlayer();
