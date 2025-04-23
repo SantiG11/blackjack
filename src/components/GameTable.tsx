@@ -4,7 +4,8 @@ import { CardType } from "./Card";
 import Player from "./Player";
 import Dealer from "./Dealer";
 import calculateTotal from "../logic/score";
-import ScoreDisplay from "./ScoreDisplay";
+
+export type GameTurn = "player" | "dealer";
 
 function GameTable() {
   const deckRef = useRef<CardDeckHandle | null>(null);
@@ -13,6 +14,8 @@ function GameTable() {
 
   const [playerScore, setPlayerScore] = useState(0);
   const [dealerScore, setDealerScore] = useState(0);
+
+  const [turn, setTurn] = useState<GameTurn>("player");
 
   const hitPlayer = (times: number = 1) => {
     setTimeout(() => {
@@ -36,6 +39,11 @@ function GameTable() {
     }, 20);
   };
 
+  const handleStand = () => {
+    setTurn("dealer");
+    console.log("Player stands. Dealer's turn.");
+  };
+
   const startGame = () => {
     hitPlayer(2);
     hitDealer(2);
@@ -57,28 +65,23 @@ function GameTable() {
       <CardDeck ref={deckRef} />
 
       <div>
-        <ScoreDisplay score={playerScore} />
-        <Player hand={playerHand} />
+        <Player hand={playerHand} score={playerScore} />
         <button
           onClick={() => {
             hitPlayer();
           }}
+          disabled={turn === "dealer"}
         >
           Hit Player
         </button>
-        <button
-          onClick={() => {
-            hitDealer();
-          }}
-        >
-          Hit Dealer
+
+        <button onClick={handleStand} disabled={turn === "dealer"}>
+          Stand
         </button>
-        <button>Stand</button>
       </div>
 
       <div>
-        <ScoreDisplay score={dealerScore} />
-        <Dealer hand={dealerHand} />
+        <Dealer hand={dealerHand} turn={turn} score={dealerScore} />
       </div>
     </div>
   );
