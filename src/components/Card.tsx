@@ -22,8 +22,10 @@ export type CardType = {
 };
 
 export default function Card({ suit, value, hidden = false }: CardType) {
-  return (
-    <div style={{ backgroundColor: hidden ? "black" : "" }}>
+  return hidden ? (
+    <div>Back of the card</div>
+  ) : (
+    <div>
       <label>{suit}</label>
       <p>{value}</p>
     </div>

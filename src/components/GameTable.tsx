@@ -3,11 +3,16 @@ import CardDeck, { CardDeckHandle } from "./CardDeck";
 import { CardType } from "./Card";
 import Player from "./Player";
 import Dealer from "./Dealer";
+import calculateTotal from "../logic/score";
+import ScoreDisplay from "./ScoreDisplay";
 
 function GameTable() {
   const deckRef = useRef<CardDeckHandle | null>(null);
   const [playerHand, setPlayerHand] = useState<CardType[]>([]);
   const [dealerHand, setDealerHand] = useState<CardType[]>([]);
+
+  const [playerScore, setPlayerScore] = useState(0);
+  const [dealerScore, setDealerScore] = useState(0);
 
   const hitPlayer = (times: number = 1) => {
     setTimeout(() => {
@@ -40,6 +45,11 @@ function GameTable() {
     startGame();
   }, []);
 
+  useEffect(() => {
+    setPlayerScore(calculateTotal(playerHand));
+    setDealerScore(calculateTotal(dealerHand));
+  }, [playerHand, dealerHand]);
+
   return (
     <div>
       <h2>Blackjack Game</h2>
@@ -47,6 +57,7 @@ function GameTable() {
       <CardDeck ref={deckRef} />
 
       <div>
+        <ScoreDisplay score={playerScore} />
         <Player hand={playerHand} />
         <button
           onClick={() => {
@@ -66,6 +77,7 @@ function GameTable() {
       </div>
 
       <div>
+        <ScoreDisplay score={dealerScore} />
         <Dealer hand={dealerHand} />
       </div>
     </div>
