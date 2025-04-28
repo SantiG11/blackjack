@@ -66,9 +66,7 @@ const CardDeck = forwardRef<CardDeckHandle, CardDeckProps>(
 
       const dealtCards = cards.slice(0, count); // Take the first 'count' cards
       setCards((prevCards) => prevCards.slice(count)); // Remove the dealt cards from the deck
-      setTimeout(() => {
-        console.log(cards.length - count);
-      }, 99);
+
       return dealtCards;
     };
 

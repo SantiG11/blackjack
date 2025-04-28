@@ -36,6 +36,7 @@ function GameTable() {
           setDealerHand((prevHand) => [...prevHand, ...newCard]);
         }
       }
+      console.log(dealerScore);
     }, 20);
   };
 
@@ -49,6 +50,14 @@ function GameTable() {
     hitDealer(2);
   };
 
+  const dealerTurn = () => {
+    if (dealerScore >= 17) {
+      console.log("Dealer score: " + dealerScore);
+      return;
+    }
+    hitDealer();
+  };
+
   useEffect(() => {
     startGame();
   }, []);
@@ -57,6 +66,14 @@ function GameTable() {
     setPlayerScore(calculateTotal(playerHand));
     setDealerScore(calculateTotal(dealerHand));
   }, [playerHand, dealerHand]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (turn === "dealer") {
+        dealerTurn();
+      }
+    }, 1000);
+  }, [turn, dealerScore]);
 
   return (
     <div>
