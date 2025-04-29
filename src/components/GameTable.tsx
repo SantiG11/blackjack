@@ -4,25 +4,33 @@ import { CardType } from "./Card";
 import Player from "./Player";
 import Dealer from "./Dealer";
 import calculateTotal from "../logic/score";
+import GameOutcome from "./GameOutcome";
 
 export type GameTurn = "player" | "dealer";
 
-enum GameState {
-  "player_turn",
-  "dealer_turn",
-  "finished_game",
-  "player_wins",
-  "dealer_wins",
-  "tie",
+export enum GameState {
+  "playing",
+  "tie_bust",
   "player_busts",
   "dealer_busts",
+
+  "tie_score",
+  "tie_blackjack",
+
+  "finished_game",
+
+  "player_wins_score",
+  "dealer_wins_score",
+
+  "player_wins_blackjack",
+  "dealer_wins_blackjack",
 }
 
 function GameTable() {
   const deckRef = useRef<CardDeckHandle | null>(null);
   const [playerHand, setPlayerHand] = useState<CardType[]>([]);
   const [dealerHand, setDealerHand] = useState<CardType[]>([]);
-  const [gameState, setGameState] = useState(GameState.player_turn);
+  const [gameState, setGameState] = useState(GameState.playing);
 
   const [playerScore, setPlayerScore] = useState(0);
   const [dealerScore, setDealerScore] = useState(0);
@@ -86,7 +94,7 @@ function GameTable() {
   ) => {
     if (playerScore > 21 && dealerScore > 21) {
       console.log("player and dealer busts");
-      return GameState.tie;
+      return GameState.tie_bust;
     }
 
     if (playerScore > 21) {
@@ -104,32 +112,32 @@ function GameTable() {
 
     if (isPlayerBlackjack && isDealerBlackjack) {
       console.log("Push (Blackjack)");
-      return GameState.tie; // Both get Blackjack is a push
+      return GameState.tie_blackjack; // Both get Blackjack is a push
     }
 
     if (isPlayerBlackjack) {
       console.log("Player gets Blackjack!");
-      return GameState.player_wins; // Player Blackjack wins
+      return GameState.player_wins_blackjack; // Player Blackjack wins
     }
 
     if (isDealerBlackjack) {
       console.log("Dealer gets Blackjack!");
-      return GameState.dealer_wins; // Dealer Blackjack wins
+      return GameState.dealer_wins_blackjack; // Dealer Blackjack wins
     }
 
     if (dealerScore > playerScore) {
       console.log("Dealer wins by score");
-      return GameState.dealer_wins; // Dealer has higher score
+      return GameState.dealer_wins_score; // Dealer has higher score
     }
 
     if (playerScore > dealerScore) {
       console.log("Player wins by score");
-      return GameState.player_wins; // Player has higher score
+      return GameState.player_wins_score; // Player has higher score
     }
 
     // If scores are equal (and no Blackjack tie)
     console.log("Push (by score)");
-    return GameState.tie;
+    return GameState.tie_score;
   };
 
   useEffect(() => {
@@ -138,7 +146,7 @@ function GameTable() {
 
   useEffect(() => {
     if (playerScore > 21) {
-      setTurn("dealer"), setGameState(GameState.player_busts);
+      setTurn("dealer");
     }
   }, [playerScore]);
 
@@ -160,6 +168,14 @@ function GameTable() {
       <h2>Blackjack Game</h2>
 
       <CardDeck ref={deckRef} />
+
+      {gameState !== GameState.playing && (
+        <GameOutcome
+          gameState={gameState}
+          playerScore={playerScore}
+          dealerScore={dealerScore}
+        />
+      )}
 
       <div>
         <Player hand={playerHand} score={playerScore} />
