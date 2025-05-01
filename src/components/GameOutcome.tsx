@@ -25,10 +25,7 @@ function GameOutcome({
         setTitle("Player wins!");
         setDetails(`Dealer busts`);
         break;
-      case GameState.tie_bust: // Assuming you added this state
-        setTitle("Tie");
-        setDetails(`Player and Dealer bust`);
-        break;
+
       case GameState.tie_blackjack: // Assuming you added this state
         setTitle("Tie");
         setDetails(`Player and Dealer Blackjack`);

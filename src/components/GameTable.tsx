@@ -10,7 +10,7 @@ export type GameTurn = "player" | "dealer";
 
 export enum GameState {
   "playing",
-  "tie_bust",
+
   "player_busts",
   "dealer_busts",
 
@@ -70,41 +70,15 @@ function GameTable() {
     hitDealer(2);
   };
 
-  const dealerTurn = () => {
-    if (dealerScore >= 17 || dealerScore > 21) {
-      console.log("Dealer's final score: " + dealerScore);
-      // Now that the dealer's turn is over, check the winner
-      const result = checkWinner(
-        playerScore,
-        dealerScore,
-        playerHand,
-        dealerHand
-      );
-      setGameState(result); // Set the game state based on the winner
-      return; // Dealer stands or busts
-    }
-    hitDealer();
-  };
-
   const checkWinner = (
     playerScore: number,
     dealerScore: number,
     playerHand: CardType[],
     dealerHand: CardType[]
   ) => {
-    if (playerScore > 21 && dealerScore > 21) {
-      console.log("player and dealer busts");
-      return GameState.tie_bust;
-    }
-
     if (playerScore > 21) {
       console.log("player busts");
       return GameState.player_busts;
-    }
-
-    if (dealerScore > 21) {
-      console.log("dealer busts");
-      return GameState.dealer_busts;
     }
 
     const isPlayerBlackjack = playerScore === 21 && playerHand.length === 2;
@@ -118,6 +92,11 @@ function GameTable() {
     if (isPlayerBlackjack) {
       console.log("Player gets Blackjack!");
       return GameState.player_wins_blackjack; // Player Blackjack wins
+    }
+
+    if (dealerScore > 21) {
+      console.log("dealer busts");
+      return GameState.dealer_busts;
     }
 
     if (isDealerBlackjack) {
@@ -156,12 +135,46 @@ function GameTable() {
   }, [playerHand, dealerHand]);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (turn === "dealer") {
-        dealerTurn();
-      }
-    }, 1000);
-  }, [turn, dealerScore]);
+    const isPlayerBlackjack = playerScore === 21 && playerHand.length === 2;
+    if (playerScore > 21) {
+      const result = checkWinner(
+        playerScore,
+        dealerScore,
+        playerHand,
+        dealerHand
+      );
+      setGameState(result);
+      return;
+    } else if (isPlayerBlackjack) {
+      setTurn("dealer");
+    }
+
+    if (isPlayerBlackjack && turn === "dealer") {
+      const result = checkWinner(
+        playerScore,
+        dealerScore,
+        playerHand,
+        dealerHand
+      );
+      setGameState(result);
+      return;
+    }
+
+    if (turn === "dealer" && dealerScore >= 17) {
+      const result = checkWinner(
+        playerScore,
+        dealerScore,
+        playerHand,
+        dealerHand
+      );
+      setGameState(result);
+      return;
+    } else if (turn === "dealer" && dealerScore < 17) {
+      setTimeout(() => {
+        hitDealer();
+      }, 1000);
+    }
+  }, [playerScore, dealerScore, turn]);
 
   return (
     <div>
