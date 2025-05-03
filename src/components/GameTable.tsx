@@ -119,15 +119,27 @@ function GameTable() {
     return GameState.tie_score;
   };
 
+  //Game Starting
   useEffect(() => {
     startGame();
   }, []);
 
+  //Check if player busts or gets Blackjack
   useEffect(() => {
-    if (playerScore > 21) {
-      setTurn("dealer");
+    // Only perform these checks during the player's turn
+    if (turn === "player") {
+      // Check for player bust
+      if (playerScore > 21) {
+        setTurn("dealer"); // Player busts, turn goes to dealer
+        // The game conclusion effect will handle setting the final state
+      }
+      // Check for player Blackjack (score is 21 and exactly 2 cards)
+      if (playerScore === 21 && playerHand.length === 2) {
+        setTurn("dealer"); // Player gets Blackjack, turn goes to dealer
+        // The game conclusion effect will handle setting the final state
+      }
     }
-  }, [playerScore]);
+  }, [playerScore, playerHand, turn]);
 
   useEffect(() => {
     setPlayerScore(calculateTotal(playerHand));
@@ -135,46 +147,29 @@ function GameTable() {
   }, [playerHand, dealerHand]);
 
   useEffect(() => {
-    const isPlayerBlackjack = playerScore === 21 && playerHand.length === 2;
-    if (playerScore > 21) {
-      const result = checkWinner(
-        playerScore,
-        dealerScore,
-        playerHand,
-        dealerHand
-      );
-      setGameState(result);
-      return;
-    } else if (isPlayerBlackjack) {
-      setTurn("dealer");
-    }
-
-    if (isPlayerBlackjack && turn === "dealer") {
-      const result = checkWinner(
-        playerScore,
-        dealerScore,
-        playerHand,
-        dealerHand
-      );
-      setGameState(result);
-      return;
-    }
-
-    if (turn === "dealer" && dealerScore >= 17) {
-      const result = checkWinner(
-        playerScore,
-        dealerScore,
-        playerHand,
-        dealerHand
-      );
-      setGameState(result);
-      return;
-    } else if (turn === "dealer" && dealerScore < 17) {
+    if (turn === "dealer" && dealerScore < 17 && playerScore < 21) {
       setTimeout(() => {
-        hitDealer();
+        hitDealer(); // Dealer hits
       }, 1000);
     }
-  }, [playerScore, dealerScore, turn]);
+
+    // If it's the dealer's turn and the dealer has finished hitting or the player busts or gets a blakcjack (stood or busted)
+    if (
+      turn === "dealer" &&
+      (dealerScore >= 17 ||
+        playerScore > 21 ||
+        (playerScore === 21 && playerHand.length === 2))
+    ) {
+      // Now that the dealer's turn is complete, check the winner
+      const result = checkWinner(
+        playerScore,
+        dealerScore,
+        playerHand,
+        dealerHand
+      );
+      setGameState(result); // Set the final game state
+    }
+  }, [dealerScore, turn]);
 
   return (
     <div>
