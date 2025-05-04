@@ -36,11 +36,18 @@ export interface CardDeckProps {
 // An interface for the methods we want to expose from the CardDeck component.
 export interface CardDeckHandle {
   dealCard: (arg?: number) => CardType[] | undefined;
+  resetDeck: () => void;
 }
 
 const CardDeck = forwardRef<CardDeckHandle, CardDeckProps>(
   ({ shouldShuffle = true }, ref) => {
     const [cards, setCards] = useState<CardType[]>([]);
+    const [deckResetKey, setDeckResetKey] = useState(0);
+
+    const resetDeck = () => {
+      setDeckResetKey((prevKey) => prevKey + 1);
+      setCards([]); // Setting cards to empty will trigger the useEffect to rebuild/shuffle
+    };
 
     useEffect(() => {
       const initialCards: CardType[] = [];
@@ -56,7 +63,7 @@ const CardDeck = forwardRef<CardDeckHandle, CardDeckProps>(
       } else {
         setCards(initialCards);
       }
-    }, [shouldShuffle]);
+    }, [shouldShuffle, deckResetKey]);
 
     const dealCard = (count: number = 1): CardType[] | undefined => {
       if (cards.length < count) {
@@ -72,6 +79,7 @@ const CardDeck = forwardRef<CardDeckHandle, CardDeckProps>(
 
     useImperativeHandle(ref, () => ({
       dealCard, // Expose the dealCard function directly
+      resetDeck: resetDeck,
     }));
 
     return <div style={{ display: "none" }}></div>;

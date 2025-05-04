@@ -5,12 +5,14 @@ interface GameOutcomeProps {
   gameState: GameState;
   dealerScore: number;
   playerScore: number;
+  handleNewGame: () => void;
 }
 
 function GameOutcome({
   gameState,
   dealerScore,
   playerScore,
+  handleNewGame,
 }: GameOutcomeProps) {
   const [title, setTitle] = useState("");
   const [details, setDetails] = useState("");
@@ -68,6 +70,7 @@ function GameOutcome({
     <div>
       <h3>{title}</h3>
       <p>{details}</p>
+      <button onClick={handleNewGame}>New Game</button>
     </div>
   );
 }

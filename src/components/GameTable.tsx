@@ -70,6 +70,21 @@ function GameTable() {
     hitDealer(2);
   };
 
+  const handleNewGame = () => {
+    setPlayerHand([]);
+    setDealerHand([]);
+    setPlayerScore(0);
+    setDealerScore(0);
+    setGameState(GameState.playing);
+    setTurn("player");
+
+    if (deckRef.current) {
+      deckRef.current.resetDeck();
+    }
+
+    startGame();
+  };
+
   const checkWinner = (
     playerScore: number,
     dealerScore: number,
@@ -147,13 +162,6 @@ function GameTable() {
   }, [playerHand, dealerHand]);
 
   useEffect(() => {
-    if (turn === "dealer" && dealerScore < 17 && playerScore < 21) {
-      setTimeout(() => {
-        hitDealer(); // Dealer hits
-      }, 1000);
-    }
-
-    // If it's the dealer's turn and the dealer has finished hitting or the player busts or gets a blakcjack (stood or busted)
     if (
       turn === "dealer" &&
       (dealerScore >= 17 ||
@@ -161,6 +169,7 @@ function GameTable() {
         (playerScore === 21 && playerHand.length === 2))
     ) {
       // Now that the dealer's turn is complete, check the winner
+      console.log(playerScore === 21 && playerHand.length === 2);
       const result = checkWinner(
         playerScore,
         dealerScore,
@@ -168,6 +177,13 @@ function GameTable() {
         dealerHand
       );
       setGameState(result); // Set the final game state
+      return;
+    }
+
+    if (turn === "dealer" && dealerScore < 17) {
+      setTimeout(() => {
+        hitDealer(); // Dealer hits
+      }, 1000);
     }
   }, [dealerScore, turn]);
 
@@ -182,6 +198,7 @@ function GameTable() {
           gameState={gameState}
           playerScore={playerScore}
           dealerScore={dealerScore}
+          handleNewGame={handleNewGame}
         />
       )}
 
