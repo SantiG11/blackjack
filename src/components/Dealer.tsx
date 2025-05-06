@@ -11,24 +11,26 @@ interface DealerProps {
 
 export default function Dealer({ hand, turn, score }: DealerProps) {
   return (
-    <div>
+    <div className="flex flex-col gap-4 p-3">
       <ScoreDisplay
         score={
           turn === "dealer" ? score : score - calculateTotal([hand[1] ?? 0])
         }
       />
       <h2>Dealer cards: </h2>
-      {hand.map((card: CardType, index: number) => {
-        const isHidden = index === 1 && turn === "player";
-        return (
-          <Card
-            key={index}
-            suit={card.suit}
-            value={card.value}
-            hidden={isHidden}
-          />
-        );
-      })}
+      <div className=" flex gap-5 flex-wrap">
+        {hand.map((card: CardType, index: number) => {
+          const isHidden = index === 1 && turn === "player";
+          return (
+            <Card
+              key={index}
+              suit={card.suit}
+              value={card.value}
+              hidden={isHidden}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

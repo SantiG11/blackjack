@@ -8,12 +8,14 @@ interface PlayerProps {
 
 export default function Player({ hand, score }: PlayerProps) {
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <ScoreDisplay score={score} />
       <h2>Player cards: </h2>
-      {hand.map((card: CardType, index: number) => {
-        return <Card key={index} suit={card.suit} value={card.value} />;
-      })}
+      <div className=" flex gap-5 flex-wrap">
+        {hand.map((card: CardType, index: number) => {
+          return <Card key={index} suit={card.suit} value={card.value} />;
+        })}
+      </div>
     </div>
   );
 }

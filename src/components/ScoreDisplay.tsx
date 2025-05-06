@@ -4,9 +4,9 @@ interface ScoreDisplayProps {
 
 const ScoreDisplay = ({ score }: ScoreDisplayProps) => {
   return (
-    <div>
-      <h3>Score: </h3>
-      <span>{score}</span>
+    <div className="flex gap-2">
+      <h3 className="font-bold">Score: </h3>
+      <span className="font-extrabold">{score}</span>
     </div>
   );
 };

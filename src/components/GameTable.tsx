@@ -5,6 +5,8 @@ import Player from "./Player";
 import Dealer from "./Dealer";
 import calculateTotal from "../logic/score";
 import GameOutcome from "./GameOutcome";
+import GameButton from "./GameButton";
+import Overlay from "./Overlay";
 
 export type GameTurn = "player" | "dealer";
 
@@ -188,10 +190,12 @@ function GameTable() {
   }, [dealerScore, turn]);
 
   return (
-    <div>
-      <h2>Blackjack Game</h2>
+    <div className="flex flex-col justify-center ">
+      <h1 className="font-extrabold text-5xl text-center">Blackjack Game</h1>
 
       <CardDeck ref={deckRef} />
+
+      {gameState !== GameState.playing && <Overlay />}
 
       {gameState !== GameState.playing && (
         <GameOutcome
@@ -203,26 +207,25 @@ function GameTable() {
       )}
 
       <div>
-        <Player hand={playerHand} score={playerScore} />
-        <button
-          onClick={() => {
-            hitPlayer();
-          }}
-          disabled={turn === "dealer" || gameState === GameState.player_busts}
-        >
-          Hit Player
-        </button>
-
-        <button
-          onClick={handleStand}
-          disabled={turn === "dealer" || gameState === GameState.player_busts}
-        >
-          Stand
-        </button>
+        <Dealer hand={dealerHand} turn={turn} score={dealerScore} />
       </div>
 
-      <div>
-        <Dealer hand={dealerHand} turn={turn} score={dealerScore} />
+      <div className="flex flex-col gap-5 w-2xl  p-3">
+        <Player hand={playerHand} score={playerScore} />
+
+        <div className="flex justify-start w-2xs gap-3">
+          <GameButton
+            buttonText="Hit"
+            disabled={turn === "dealer" || gameState === GameState.player_busts}
+            action={hitPlayer}
+          />
+
+          <GameButton
+            buttonText="Stand"
+            disabled={turn === "dealer" || gameState === GameState.player_busts}
+            action={handleStand}
+          />
+        </div>
       </div>
     </div>
   );
