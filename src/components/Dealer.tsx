@@ -18,7 +18,7 @@ export default function Dealer({ hand, turn, score }: DealerProps) {
         }
       />
       <h2>Dealer cards: </h2>
-      <div className=" flex gap-5 flex-wrap">
+      <div className=" flex gap-5 flex-wrap w-2xl h-36">
         {hand.map((card: CardType, index: number) => {
           const isHidden = index === 1 && turn === "player";
           return (
