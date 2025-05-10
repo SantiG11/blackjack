@@ -43,6 +43,7 @@ function GameTable() {
 
   const [playerScore, setPlayerScore] = useState(0);
   const [dealerScore, setDealerScore] = useState(0);
+  const [moves, setMoves] = useState(0);
 
   const [turn, setTurn] = useState<GameTurn>("player");
 
@@ -105,28 +106,27 @@ function GameTable() {
   };
 
   const hitDealer = (times: number = 1) => {
-    setTimeout(() => {
-      if (deckRef.current) {
-        const newCard = deckRef.current.dealCard(times);
-        if (newCard) {
-          setDealerHand((prevHand) => [...prevHand, ...newCard]);
-        }
+    // setTimeout(() => {
+    if (deckRef.current) {
+      const newCard = deckRef.current.dealCard(times);
+      if (newCard) {
+        setDealerHand((prevHand) => [...prevHand, ...newCard]);
       }
-    }, 20);
+    }
+    // }, 20);
   };
 
   const handleStand = () => {
     setTurn("dealer");
-    console.log("Player stands. Dealer's turn.");
   };
 
   const startGame = () => {
     if (currentBet > 0) {
       hitPlayer(2);
       hitDealer(2);
-      setTimeout(() => {
-        setGameState(GameState.playing);
-      }, 20);
+      // setTimeout(() => {
+      setGameState(GameState.playing);
+      // }, 20);
     } else {
       alert("Place a bet before playing");
     }
@@ -153,7 +153,6 @@ function GameTable() {
     dealerHand: CardType[]
   ) => {
     if (playerScore > 21) {
-      console.log("player busts");
       return GameState.player_busts;
     }
 
@@ -161,37 +160,31 @@ function GameTable() {
     const isDealerBlackjack = dealerScore === 21 && dealerHand.length === 2;
 
     if (isPlayerBlackjack && isDealerBlackjack) {
-      console.log("Push (Blackjack)");
       return GameState.tie_blackjack; // Both get Blackjack is a push
     }
 
     if (isPlayerBlackjack && turn === "dealer" && !isDealerBlackjack) {
-      console.log("Player gets Blackjack!");
       return GameState.player_wins_blackjack; // Player Blackjack wins
     }
 
     if (dealerScore > 21) {
-      console.log("dealer busts");
       return GameState.dealer_busts;
     }
 
     if (isDealerBlackjack) {
-      console.log("Dealer gets Blackjack!");
       return GameState.dealer_wins_blackjack; // Dealer Blackjack wins
     }
 
     if (dealerScore > playerScore) {
-      console.log("Dealer wins by score");
       return GameState.dealer_wins_score; // Dealer has higher score
     }
 
     if (playerScore > dealerScore) {
-      console.log("Player wins by score");
       return GameState.player_wins_score; // Player has higher score
     }
 
     // If scores are equal (and no Blackjack tie)
-    console.log("Push (by score)");
+
     return GameState.tie_score;
   };
 
@@ -223,17 +216,19 @@ function GameTable() {
   useEffect(() => {
     setPlayerScore(calculateTotal(playerHand));
     setDealerScore(calculateTotal(dealerHand));
+    setMoves((prev) => prev + 1);
   }, [playerHand, dealerHand]);
 
   useEffect(() => {
-    if (
+    const gameConcluded =
       turn === "dealer" &&
       (dealerScore >= 17 ||
         playerScore > 21 ||
-        (playerScore === 21 && playerHand.length === 2))
-    ) {
+        (playerScore === 21 && playerHand.length === 2));
+
+    if (gameConcluded) {
       // Now that the dealer's turn is complete, check the winner
-      console.log(playerScore === 21 && playerHand.length === 2);
+
       const result = checkWinner(
         playerScore,
         dealerScore,
@@ -287,12 +282,10 @@ function GameTable() {
 
     if (turn === "dealer" && dealerScore < 17) {
       setTimeout(() => {
-        hitDealer(); // Dealer hits
+        hitDealer();
       }, 1000);
     }
-  }, [dealerScore, turn, gameState, playerScore, playerHand]);
-
-  useEffect(() => {}, [playerMoney]);
+  }, [dealerScore, turn, gameState, playerScore, playerHand, moves]);
 
   return (
     <div className="flex flex-col justify-center ">
@@ -313,8 +306,8 @@ function GameTable() {
         />
       )}
 
-      {playerMoney < 2.5 && <Overlay />}
-      {playerMoney < 2.5 && (
+      {playerMoney < 2.5 && gameState === GameState.betting && <Overlay />}
+      {playerMoney < 2.5 && gameState === GameState.betting && (
         <GameMessage
           message="You must add money to play"
           action={handleAddMoney}
