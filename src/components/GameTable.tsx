@@ -10,6 +10,7 @@ import Overlay from "./Overlay";
 import PlayerMoney from "./PlayerMoney";
 import GameMessage from "./GameMessage";
 import BettingControls from "./BettingControls";
+import PlayerControls from "./PlayerControls";
 
 export type GameTurn = "player" | "dealer";
 
@@ -302,7 +303,10 @@ function GameTable() {
     <div className="flex flex-col justify-center ">
       <h1 className="font-extrabold text-5xl text-center">Blackjack Game</h1>
 
+      {/*----------- Card Deck ----------- */}
       <CardDeck ref={deckRef} />
+
+      {/*----------- Game state and messages ----------- */}
 
       {gameState !== GameState.playing && gameState !== GameState.betting && (
         <Overlay />
@@ -326,6 +330,8 @@ function GameTable() {
         />
       )}
 
+      {/*----------- Dealer ----------- */}
+
       <div>
         <Dealer
           hand={dealerHand}
@@ -334,31 +340,20 @@ function GameTable() {
         />
       </div>
 
+      {/*----------- Player ----------- */}
+
       <div className="flex flex-col gap-5 w-2xl  p-3">
         <Player hand={playerHand} score={playerScore} />
 
-        <div className="flex justify-start w-2xs gap-3">
-          <GameButton
-            buttonText="Hit"
-            disabled={
-              turn === "dealer" ||
-              gameState === GameState.player_busts ||
-              gameState === GameState.betting
-            }
-            action={hitPlayer}
-          />
-
-          <GameButton
-            buttonText="Stand"
-            disabled={
-              turn === "dealer" ||
-              gameState === GameState.player_busts ||
-              gameState === GameState.betting
-            }
-            action={handleStand}
-          />
-        </div>
+        <PlayerControls
+          turn={turn}
+          gameState={gameState}
+          hitPlayer={hitPlayer}
+          handleStand={handleStand}
+        />
       </div>
+
+      {/*----------- Betting ----------- */}
 
       <BettingControls
         currentBet={currentBet}
