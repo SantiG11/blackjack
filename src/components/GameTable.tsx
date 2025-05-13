@@ -9,6 +9,7 @@ import GameButton from "./GameButton";
 import Overlay from "./Overlay";
 import PlayerMoney from "./PlayerMoney";
 import GameMessage from "./GameMessage";
+import BettingControls from "./BettingControls";
 
 export type GameTurn = "player" | "dealer";
 
@@ -47,7 +48,7 @@ function GameTable() {
 
   const [turn, setTurn] = useState<GameTurn>("player");
 
-  //Betting
+  //---------- Betting ----------------
   const [playerMoney, setPlayerMoney] = useState(() => {
     const storedMoney = localStorage.getItem("playerMoney");
     if (storedMoney !== null) {
@@ -61,7 +62,7 @@ function GameTable() {
   });
   const [currentBet, setCurrentBet] = useState(0);
 
-  const handleBet = (money: number) => {
+  const handleBet = (money: BetCoin) => {
     if (playerMoney >= money) {
       setCurrentBet((prevState) => prevState + money);
     } else {
@@ -93,6 +94,8 @@ function GameTable() {
   const handleResetBet = () => {
     setCurrentBet(0);
   };
+
+  //------------- Gaming Actions --------------
 
   const hitPlayer = (times: number = 1) => {
     setTimeout(() => {
@@ -146,6 +149,8 @@ function GameTable() {
     }
   };
 
+  //------------- Game Logic ---------------
+
   const checkWinner = (
     playerScore: number,
     dealerScore: number,
@@ -188,10 +193,14 @@ function GameTable() {
     return GameState.tie_score;
   };
 
+  //------------- Effects -------------------
+
+  // Initial setup on mount
   useEffect(() => {
     handleNewGame();
   }, []);
 
+  // Check player outcome during their turn
   useEffect(() => {
     localStorage.setItem("playerMoney", String(playerMoney));
   }, [playerMoney]);
@@ -213,12 +222,14 @@ function GameTable() {
     }
   }, [playerScore, playerHand, turn]);
 
+  // Update Scores
   useEffect(() => {
     setPlayerScore(calculateTotal(playerHand));
     setDealerScore(calculateTotal(dealerHand));
     setMoves((prev) => prev + 1);
   }, [playerHand, dealerHand]);
 
+  // Dealer turn logic and game conclusion
   useEffect(() => {
     const gameConcluded =
       turn === "dealer" &&
@@ -349,36 +360,15 @@ function GameTable() {
         </div>
       </div>
 
-      <p>Bet: {currentBet}</p>
-
-      <div className="flex gap-3 m-2">
-        {Coins.map((coin) => (
-          <GameButton
-            buttonText={`$${coin}`}
-            disabled={
-              gameState !== GameState.betting || playerMoney < currentBet + coin
-            }
-            action={() => handleBet(coin)}
-          />
-        ))}
-      </div>
-      <div className="flex gap-3 m-2">
-        <GameButton
-          buttonText="Clear Bet"
-          disabled={gameState !== GameState.betting}
-          action={handleResetBet}
-        />
-
-        <GameButton
-          buttonText="Deal cards"
-          disabled={
-            gameState !== GameState.betting ||
-            currentBet === 0 ||
-            playerMoney < currentBet
-          }
-          action={handleBetAndDeal}
-        />
-      </div>
+      <BettingControls
+        currentBet={currentBet}
+        playerMoney={playerMoney}
+        gameState={gameState}
+        coins={Coins}
+        handleBet={handleBet}
+        handleResetBet={handleResetBet}
+        handleBetAndDeal={handleBetAndDeal}
+      />
 
       <PlayerMoney money={playerMoney} />
       <button
