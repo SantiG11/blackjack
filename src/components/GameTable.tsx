@@ -11,6 +11,7 @@ import PlayerMoney from "./PlayerMoney";
 import GameMessage from "./GameMessage";
 import BettingControls from "./BettingControls";
 import PlayerControls from "./PlayerControls";
+import PlayerMoneyControls from "./PlayerMoneyControls";
 
 export type GameTurn = "player" | "dealer";
 
@@ -73,6 +74,10 @@ function GameTable() {
 
   const handleAddMoney = () => {
     setPlayerMoney((prevMoney) => prevMoney + 500);
+  };
+
+  const handleResetMoney = () => {
+    setPlayerMoney(0);
   };
 
   const handleBetAndDeal = () => {
@@ -365,19 +370,11 @@ function GameTable() {
         handleBetAndDeal={handleBetAndDeal}
       />
 
-      <PlayerMoney money={playerMoney} />
-      <button
-        onClick={handleAddMoney}
-        className="hover:cursor-pointer px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors w-40 my-1"
-      >
-        Add money (+500)
-      </button>
-      <button
-        onClick={() => setPlayerMoney(0)}
-        className="hover:cursor-pointer px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors w-40 my-1"
-      >
-        Reset money
-      </button>
+      <PlayerMoneyControls
+        playerMoney={playerMoney}
+        handleAddMoney={handleAddMoney}
+        handleResetMoney={handleResetMoney}
+      />
     </div>
   );
 }
