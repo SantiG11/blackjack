@@ -12,6 +12,7 @@ import GameMessage from "./GameMessage";
 import BettingControls from "./BettingControls";
 import PlayerControls from "./PlayerControls";
 import PlayerMoneyControls from "./PlayerMoneyControls";
+import PlayerArea from "./PlayerArea";
 
 export type GameTurn = "player" | "dealer";
 
@@ -347,16 +348,14 @@ function GameTable() {
 
       {/*----------- Player ----------- */}
 
-      <div className="flex flex-col gap-5 w-2xl  p-3">
-        <Player hand={playerHand} score={playerScore} />
-
-        <PlayerControls
-          turn={turn}
-          gameState={gameState}
-          hitPlayer={hitPlayer}
-          handleStand={handleStand}
-        />
-      </div>
+      <PlayerArea
+        playerHand={playerHand}
+        playerScore={playerScore}
+        turn={turn}
+        gameState={gameState} // Pass gameState for disabling logic in PlayerControls
+        hitPlayer={hitPlayer}
+        handleStand={handleStand}
+      />
 
       {/*----------- Betting ----------- */}
 
