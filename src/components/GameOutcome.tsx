@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GameState } from "./GameTable";
+import { GameState, Outcome } from "../utils/GameTypes";
 
 interface GameOutcomeProps {
   gameState: GameState;
@@ -7,8 +7,6 @@ interface GameOutcomeProps {
   playerScore: number;
   handleNewGame: () => void;
 }
-
-export type Outcome = "Tie" | "Player" | "Dealer" | "None";
 
 function GameOutcome({
   gameState,

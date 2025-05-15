@@ -1,25 +1,8 @@
 import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
-import { Suit, Value, CardType } from "./Card";
+import { CardType } from "../utils/GameTypes";
+import { suits, values } from "../utils/GameConstants";
 
-//All the values and suits of of the cards
-const suits: Suit[] = ["Clubs", "Diamonds", "Hearts", "Spades"];
-const values: Value[] = [
-  "A",
-  "2",
-  "3",
-  "4",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "J",
-  "Q",
-  "K",
-];
-
-//A funcition to shuffle the array of cards
+//A function to shuffle the array of cards
 function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];
   for (let i = newArray.length - 1; i > 0; i--) {

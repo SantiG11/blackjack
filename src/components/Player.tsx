@@ -1,4 +1,5 @@
-import Card, { CardType } from "./Card";
+import { CardType } from "../utils/GameTypes";
+import Card from "./Card";
 import ScoreDisplay from "./ScoreDisplay";
 
 interface PlayerProps {

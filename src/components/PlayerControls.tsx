@@ -1,5 +1,5 @@
+import { GameState, GameTurn } from "../utils/GameTypes";
 import GameButton from "./GameButton";
-import { GameState, GameTurn } from "./GameTable";
 
 interface PlayerControlsProps {
   turn: GameTurn;

@@ -1,6 +1,6 @@
 import GameButton from "./GameButton"; // Assuming GameButton is in the same directory
-import { GameState } from "./GameTable"; // Import GameState enum
-import { BetCoin } from "./GameTable";
+import { GameState } from "../utils/GameTypes"; // Import GameState enum
+import { BetCoin } from "../utils/GameTypes";
 
 interface BettingControlsProps {
   currentBet: number;

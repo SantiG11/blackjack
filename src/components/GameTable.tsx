@@ -12,32 +12,8 @@ import BettingControls from "./BettingControls";
 import PlayerMoneyControls from "./PlayerMoneyControls";
 import PlayerArea from "./PlayerArea";
 
-import { MINIMUM_BET_CHECK } from "../utils/GameConstans";
-
-export type GameTurn = "player" | "dealer";
-
-export type BetCoin = 2.5 | 5 | 10 | 25 | 50 | 100;
-
-const Coins: BetCoin[] = [2.5, 5, 10, 25, 50, 100];
-
-export enum GameState {
-  "playing",
-  "betting",
-
-  "player_busts",
-  "dealer_busts",
-
-  "tie_score",
-  "tie_blackjack",
-
-  "finished_game",
-
-  "player_wins_score",
-  "dealer_wins_score",
-
-  "player_wins_blackjack",
-  "dealer_wins_blackjack",
-}
+import { MINIMUM_BET_CHECK, Coins } from "../utils/GameConstants";
+import { GameState } from "../utils/GameTypes";
 
 import { useBlackjackGame } from "../hooks/useBlackjackGame";
 

@@ -1,6 +1,6 @@
 import calculateTotal from "../logic/score";
-import Card, { CardType } from "./Card";
-import { GameTurn } from "./GameTable";
+import { CardType, GameTurn } from "../utils/GameTypes";
+import Card from "./Card";
 import ScoreDisplay from "./ScoreDisplay";
 
 interface DealerProps {

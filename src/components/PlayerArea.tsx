@@ -1,7 +1,6 @@
+import { CardType, GameState, GameTurn } from "../utils/GameTypes";
 import Player from "./Player";
 import PlayerControls from "./PlayerControls";
-import { CardType } from "./Card";
-import { GameTurn, GameState } from "./GameTable";
 
 interface PlayerAreaProps {
   playerHand: CardType[];

@@ -9,11 +9,11 @@ import {
   STANDARD_PAYOUT_MULTIPLIER,
   PUSH_PAYOUT_MULTIPLIER,
   ADD_MONEY_AMOUNT,
-} from "../utils/GameConstans";
+} from "../utils/GameConstants";
 
 import { useEffect, useRef, useState } from "react";
-import { CardType } from "../components/Card";
-import { BetCoin, GameState, GameTurn } from "../components/GameTable";
+
+import { BetCoin, GameState, GameTurn, CardType } from "../utils/GameTypes";
 import { CardDeckHandle } from "../components/CardDeck";
 import calculateTotal from "../logic/score";
 
