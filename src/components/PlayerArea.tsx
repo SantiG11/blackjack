@@ -1,3 +1,4 @@
+import { GameSection } from "../layout/GameSection";
 import { CardType, GameState, GameTurn } from "../utils/GameTypes";
 import Player from "./Player";
 import PlayerControls from "./PlayerControls";
@@ -20,7 +21,7 @@ export default function PlayerArea({
   handleStand,
 }: PlayerAreaProps) {
   return (
-    <div className="flex flex-col gap-5 w-2xl p-3">
+    <GameSection>
       <Player hand={playerHand} score={playerScore} />
 
       <PlayerControls
@@ -29,6 +30,6 @@ export default function PlayerArea({
         hitPlayer={hitPlayer}
         handleStand={handleStand}
       />
-    </div>
+    </GameSection>
   );
 }

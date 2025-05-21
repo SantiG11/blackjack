@@ -13,8 +13,8 @@ export default function GameButton({
     <button
       onClick={() => action()}
       disabled={disabled}
-      className={` bg-green-500  rounded-full h-14 w-14 text-sm font-bold hover:cursor-pointer ${
-        disabled ? "opacity-50" : ""
+      className={` bg-[#10a167]   text-white border border-[#0f5438] py-2 px-4 rounded-xl sm:px-8 text-xs sm:text-sm flex-1 sm:flex-none ${
+        disabled ? "opacity-50 " : "hover:cursor-pointer hover:bg-[#0c4830]"
       }`}
     >
       {buttonText}

@@ -1,6 +1,9 @@
-import GameButton from "./GameButton"; // Assuming GameButton is in the same directory
-import { GameState } from "../utils/GameTypes"; // Import GameState enum
+import GameButton from "../layout/GameButton";
+import { GameState } from "../utils/GameTypes";
 import { BetCoin } from "../utils/GameTypes";
+import { GameSection } from "../layout/GameSection";
+import ValueText from "../layout/ValueText";
+import { ButtonsContainer } from "../layout/ButtonsContainer";
 
 interface BettingControlsProps {
   currentBet: number;
@@ -26,10 +29,10 @@ export default function BettingControls({
   //   const isBettingPhase = gameState === GameState.betting;
 
   return (
-    <div className="flex flex-col items-start m-2 p-2 gap-2">
-      <p className="text-xl font-semibold mb-2">Bet: {currentBet}</p>
+    <GameSection>
+      <ValueText text="Current bet: " value={"$" + currentBet} />
 
-      <div className="flex gap-3 ">
+      <ButtonsContainer>
         {coins.map((coin) => (
           <GameButton
             buttonText={`$${coin}`}
@@ -39,7 +42,7 @@ export default function BettingControls({
             action={() => handleBet(coin)}
           />
         ))}
-      </div>
+      </ButtonsContainer>
 
       <div className="flex gap-3 ">
         <GameButton
@@ -58,6 +61,6 @@ export default function BettingControls({
           action={handleBetAndDeal}
         />
       </div>
-    </div>
+    </GameSection>
   );
 }

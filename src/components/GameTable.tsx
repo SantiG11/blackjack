@@ -41,9 +41,7 @@ function GameTable() {
   } = useBlackjackGame();
 
   return (
-    <div className="flex flex-col justify-center ">
-      <h1 className="font-extrabold text-5xl text-center">Blackjack Game</h1>
-
+    <div className="flex flex-col justify-between gap-2 text-white bg-[#0a3c28] rounded-xl border-4 sm:border-8 border-[#2a1a12] shadow-2xl p-2 sm:p-6 md:p-4 relative  ">
       {/*----------- Card Deck ----------- */}
       <CardDeck ref={deckRef} />
 
@@ -72,6 +70,18 @@ function GameTable() {
           btnName="Add money (+500)"
         />
       )}
+
+      {/*----------- Header ----------- */}
+
+      <header className="flex flex-col md:flex-row justify-between items-center mb-4 sm:mb-6 md:mb-8 ">
+        <h1 className="font-bold text-3xl ">Blackjack</h1>
+
+        <PlayerMoneyControls
+          playerMoney={playerMoney}
+          handleAddMoney={handleAddMoney}
+          handleResetMoney={handleResetMoney}
+        />
+      </header>
 
       {/*----------- Dealer ----------- */}
 
@@ -104,12 +114,6 @@ function GameTable() {
         handleBet={handleBet}
         handleResetBet={handleResetBet}
         handleBetAndDeal={handleBetAndDeal}
-      />
-
-      <PlayerMoneyControls
-        playerMoney={playerMoney}
-        handleAddMoney={handleAddMoney}
-        handleResetMoney={handleResetMoney}
       />
     </div>
   );

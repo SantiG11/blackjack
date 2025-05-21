@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { GameState, Outcome } from "../utils/GameTypes";
+import SecondaryButton from "../layout/SecondaryButton";
 
 interface GameOutcomeProps {
   gameState: GameState;
@@ -77,20 +78,22 @@ function GameOutcome({
 
   return (
     <div
-      className={`bg-white p-6 rounded-lg shadow-lg text-center z-100 w-sm h-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+      className={`bg-[#1a1a1a]/80 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center z-100 w-sm h-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
         winner === "Player" && "border-4 border-green-500"
-      } ${winner === "Dealer" && "border-4 border-red-600"} ${
-        winner === "Tie" && "border-4 border-gray-400"
+      } ${winner === "Dealer" && "border-4 border-[#aa3c3c]"} ${
+        winner === "Tie" && "border-4 border-gray-600"
       }`}
     >
-      <h3 className="text-2xl font-bold mb-4">{title}</h3>
-      <p className="text-lg mb-6">{details}</p>
-      <button
-        onClick={handleNewGame}
-        className="hover:cursor-pointer px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors"
+      <h3
+        className={`text-2xl font-bold mb-4 ${
+          winner === "Player" && " text-[#5caa7a]"
+        }  ${winner === "Dealer" && " text-[#aa3c3c]"}`}
       >
-        New Game
-      </button>
+        {title}
+      </h3>
+      <p className="text-lg font-medium mb-6">{details}</p>
+
+      <SecondaryButton buttonText="New Game" action={handleNewGame} />
     </div>
   );
 }

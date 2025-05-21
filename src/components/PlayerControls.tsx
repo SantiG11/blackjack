@@ -1,5 +1,6 @@
+import { ButtonsContainer } from "../layout/ButtonsContainer";
 import { GameState, GameTurn } from "../utils/GameTypes";
-import GameButton from "./GameButton";
+import GameButton from "../layout/GameButton";
 
 interface PlayerControlsProps {
   turn: GameTurn;
@@ -21,7 +22,7 @@ export default function PlayerControls({
   const buttonDisabled = !isPlayerTurn || !isGamePlaying || playerBusted;
 
   return (
-    <div className="flex justify-start w-2xs gap-3">
+    <ButtonsContainer>
       <GameButton
         buttonText="Hit"
         disabled={buttonDisabled}
@@ -33,6 +34,6 @@ export default function PlayerControls({
         disabled={buttonDisabled}
         action={handleStand}
       />
-    </div>
+    </ButtonsContainer>
   );
 }

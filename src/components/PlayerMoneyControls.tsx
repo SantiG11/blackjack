@@ -1,4 +1,8 @@
-import PlayerMoney from "./PlayerMoney";
+import { useState } from "react";
+
+import SecondaryButton from "../layout/SecondaryButton";
+import ValueText from "../layout/ValueText";
+import { Dropdown } from "../layout/Dropdown";
 
 interface PlayerMoneyControlsProps {
   playerMoney: number;
@@ -11,21 +15,29 @@ export default function PlayerMoneyControls({
   handleAddMoney,
   handleResetMoney,
 }: PlayerMoneyControlsProps) {
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const handleDropdown = () => {
+    setShowDropdown((state) => !state);
+  };
+
   return (
-    <div className="flex flex-col items-start gap-2 mt-4">
-      <PlayerMoney money={playerMoney} />
-      <button
-        onClick={handleAddMoney}
-        className="hover:cursor-pointer px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors w-40 my-1"
-      >
-        Add money (+500)
-      </button>
-      <button
-        onClick={handleResetMoney}
-        className="hover:cursor-pointer px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors w-40 my-1"
-      >
-        Reset money
-      </button>
+    <div className="flex flex-col items-center m-2 relative  group ">
+      <ValueText
+        text="Balance: "
+        value={"$" + playerMoney}
+        action={handleDropdown}
+        style="hover:cursor-pointer"
+      />
+
+      <Dropdown show={showDropdown}>
+        <SecondaryButton
+          action={handleAddMoney}
+          buttonText="Add money (+500)"
+          disabled={!showDropdown}
+        />
+        <SecondaryButton action={handleResetMoney} buttonText="Reset money" />
+      </Dropdown>
     </div>
   );
 }
