@@ -4,6 +4,7 @@ import { BetCoin } from "../utils/GameTypes";
 import { GameSection } from "../layout/GameSection";
 import ValueText from "../layout/ValueText";
 import { ButtonsContainer } from "../layout/ButtonsContainer";
+import { Coin } from "./Coin";
 
 interface BettingControlsProps {
   currentBet: number;
@@ -34,8 +35,8 @@ export default function BettingControls({
 
       <ButtonsContainer>
         {coins.map((coin) => (
-          <GameButton
-            buttonText={`$${coin}`}
+          <Coin
+            value={coin}
             disabled={
               gameState !== GameState.betting || playerMoney < currentBet + coin
             }
@@ -44,13 +45,7 @@ export default function BettingControls({
         ))}
       </ButtonsContainer>
 
-      <div className="flex gap-3 ">
-        <GameButton
-          buttonText="Clear Bet"
-          disabled={gameState !== GameState.betting}
-          action={handleResetBet}
-        />
-
+      <ButtonsContainer>
         <GameButton
           buttonText="Deal cards"
           disabled={
@@ -60,7 +55,14 @@ export default function BettingControls({
           }
           action={handleBetAndDeal}
         />
-      </div>
+
+        <GameButton
+          buttonText="Clear Bet"
+          disabled={gameState !== GameState.betting || currentBet === 0}
+          action={handleResetBet}
+          bg="#FF0000"
+        />
+      </ButtonsContainer>
     </GameSection>
   );
 }

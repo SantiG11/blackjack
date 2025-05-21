@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import SecondaryButton from "../layout/SecondaryButton";
 import ValueText from "../layout/ValueText";
@@ -8,18 +8,28 @@ interface PlayerMoneyControlsProps {
   playerMoney: number;
   handleAddMoney: () => void;
   handleResetMoney: () => void;
+  dropdown: boolean;
 }
 
 export default function PlayerMoneyControls({
   playerMoney,
   handleAddMoney,
   handleResetMoney,
+  dropdown,
 }: PlayerMoneyControlsProps) {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleDropdown = () => {
-    setShowDropdown((state) => !state);
+    if (dropdown) {
+      setShowDropdown((state) => !state);
+    }
   };
+
+  useEffect(() => {
+    if (!dropdown) {
+      setShowDropdown(false);
+    }
+  }, [dropdown]);
 
   return (
     <div className="flex flex-col items-center m-2 relative  group ">

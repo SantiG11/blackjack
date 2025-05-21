@@ -11,7 +11,36 @@ export const PUSH_PAYOUT_MULTIPLIER = 0; // Payout multiplier for a push (tie)
 export const ADD_MONEY_AMOUNT = 500; // Amount added by the "Add Money" button
 export const MINIMUM_BET_CHECK: BetCoin = 2.5; // Minimum amount for the low money check (already using Coins, but good to be explicit if needed)
 
+// ---- Coin constants ----
 export const Coins: BetCoin[] = [2.5, 5, 10, 25, 50, 100];
+
+export const coinBg = (coin: number) => {
+  let color = "";
+  switch (coin) {
+    case 2.5:
+      color = "[#FF69B4]"; // Light teal
+      break;
+    case 5:
+      color = "[#FF0000]"; // Steel blue
+      break;
+    case 10:
+      color = "[#3B82F6]"; // Navy blue
+      break;
+    case 25:
+      color = "[#16A34A]"; // Sandy orange
+      break;
+    case 50:
+      color = "[#EA580C]"; // Burnt orange
+      break;
+    case 100:
+      color = "[#3D3D3D]"; // Dark turquoise
+      break;
+    default:
+      color = "[#FF0000]"; // Default gray
+  }
+
+  return color;
+};
 
 // --- Card Constants ---
 

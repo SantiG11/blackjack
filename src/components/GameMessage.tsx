@@ -1,3 +1,5 @@
+import SecondaryButton from "../layout/SecondaryButton";
+
 interface GameMessageProps {
   message: string;
   action?: () => void;
@@ -10,16 +12,16 @@ export default function GameMessage({
   btnName,
 }: GameMessageProps) {
   return (
-    <div className="bg-[#1a1a1a]/60 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center z-100 w-sm h-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-      <p>{message}</p>
-      {action && (
-        <button
-          onClick={action}
-          className="hover:cursor-pointer px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors w-40 my-1"
-        >
-          {btnName}
-        </button>
-      )}
+    <div className="fixed inset-0 flex items-center justify-center z-100">
+      <div className="bg-[#1a1a1a]/60 flex flex-col justify-center items-center gap-4 backdrop-blur-sm  p-6 rounded-lg shadow-lg text-center z-100 w-3xs h-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        <p>{message}</p>
+        {action && (
+          <SecondaryButton
+            action={action}
+            buttonText={btnName ? btnName : ""}
+          />
+        )}
+      </div>
     </div>
   );
 }

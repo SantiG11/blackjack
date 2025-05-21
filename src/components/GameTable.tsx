@@ -80,6 +80,7 @@ function GameTable() {
           playerMoney={playerMoney}
           handleAddMoney={handleAddMoney}
           handleResetMoney={handleResetMoney}
+          dropdown={gameState === GameState.betting}
         />
       </header>
 
