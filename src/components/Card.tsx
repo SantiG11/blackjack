@@ -25,7 +25,7 @@ export default function Card({ suit, value, hidden = false }: CardType) {
     : "text-[#1a1a1a]";
 
   return hidden ? (
-    <div className="w-[70px] h-[98px] sm:w-[85px] sm:h-[119px] md:w-[100px] md:h-[140px] rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#333333] shadow-xl flex items-center justify-center p-1 transform transition-transform hover:rotate-1 hover:scale-105">
+    <div className="w-[70px] h-[98px] md:w-[100px] md:h-[140px] rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#333333] shadow-xl flex items-center justify-center p-1 transform transition-transform hover:rotate-1 hover:scale-105">
       <div className="w-full h-full rounded bg-[#0f0f0f] flex items-center justify-center">
         <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
           <div className="w-full h-full rounded-full border-4 border-dashed border-[#333333] animate-spin-slow"></div>

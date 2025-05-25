@@ -34,9 +34,10 @@ export default function BettingControls({
       <ValueText text="Current bet: " value={"$" + currentBet} />
 
       <ButtonsContainer>
-        {coins.map((coin) => (
+        {coins.map((coin, index) => (
           <Coin
             value={coin}
+            key={index}
             disabled={
               gameState !== GameState.betting || playerMoney < currentBet + coin
             }
@@ -60,7 +61,7 @@ export default function BettingControls({
           buttonText="Clear Bet"
           disabled={gameState !== GameState.betting || currentBet === 0}
           action={handleResetBet}
-          bg="#FF0000"
+          bg="bg-[#FF0000]"
         />
       </ButtonsContainer>
     </GameSection>

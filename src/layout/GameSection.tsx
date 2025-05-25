@@ -5,5 +5,5 @@ type GameSectionProps = {
 };
 
 export function GameSection({ children }: GameSectionProps) {
-  return <div className=" flex flex-col gap-4 p-3 ">{children}</div>;
+  return <div className=" flex flex-col gap-2 px-3 py-1">{children}</div>;
 }

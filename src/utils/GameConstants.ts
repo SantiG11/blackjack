@@ -18,25 +18,53 @@ export const coinBg = (coin: number) => {
   let color = "";
   switch (coin) {
     case 2.5:
-      color = "[#FF69B4]"; // Light teal
+      color = "bg-[#FF69B4]"; // Light teal
       break;
     case 5:
-      color = "[#FF0000]"; // Steel blue
+      color = "bg-[#FF0000]"; // Steel blue
       break;
     case 10:
-      color = "[#3B82F6]"; // Navy blue
+      color = "bg-[#3B82F6]"; // Navy blue
       break;
     case 25:
-      color = "[#16A34A]"; // Sandy orange
+      color = "bg-[#16A34A]"; // Sandy orange
       break;
     case 50:
-      color = "[#EA580C]"; // Burnt orange
+      color = "bg-[#EA580C]"; // Burnt orange
       break;
     case 100:
-      color = "[#3D3D3D]"; // Dark turquoise
+      color = "bg-[#3D3D3D]"; // Dark turquoise
       break;
     default:
-      color = "[#FF0000]"; // Default gray
+      color = "bg-[#FF0000]"; // Default gray
+  }
+
+  return color;
+};
+
+export const coinText = (coin: number) => {
+  let color = "";
+  switch (coin) {
+    case 2.5:
+      color = "text-[#FF69B4]"; // Light teal
+      break;
+    case 5:
+      color = "text-[#FF0000]"; // Steel blue
+      break;
+    case 10:
+      color = "text-[#3B82F6]"; // Navy blue
+      break;
+    case 25:
+      color = "text-[#16A34A]"; // Sandy orange
+      break;
+    case 50:
+      color = "text-[#EA580C]"; // Burnt orange
+      break;
+    case 100:
+      color = "text-[#3D3D3D]"; // Dark turquoise
+      break;
+    default:
+      color = "text-[#FF0000]"; // Default gray
   }
 
   return color;

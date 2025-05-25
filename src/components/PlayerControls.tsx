@@ -33,7 +33,7 @@ export default function PlayerControls({
         buttonText="Stand"
         disabled={buttonDisabled}
         action={handleStand}
-        bg="#FF0000"
+        bg="bg-[#FF0000]"
       />
     </ButtonsContainer>
   );
