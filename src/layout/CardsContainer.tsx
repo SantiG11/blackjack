@@ -6,7 +6,7 @@ type CardsContainerProps = {
 
 export function CardsContainer({ children }: CardsContainerProps) {
   return (
-    <div className=" flex items-center p-2 gap-3 flex-wrap xl:w-[50vw] min-h-[120px] border-2 border-dashed rounded-md border-gray-950 ">
+    <div className=" flex items-center p-2 gap-3 flex-wrap  min-h-[120px] md:min-h-[140px] border-2 border-dashed rounded-md border-gray-950 ">
       {children}
     </div>
   );

@@ -30,40 +30,46 @@ export default function BettingControls({
   //   const isBettingPhase = gameState === GameState.betting;
 
   return (
-    <GameSection>
-      <ValueText text="Current bet: " value={"$" + currentBet} />
+    <div
+      className=" md:absolute md:right-0  md:bottom-0 bg-[#1a1a1a]/60 backdrop-blur-sm  rounded-lg shadow-lg md:m-2  py-2
+      "
+    >
+      <GameSection>
+        <ValueText text="Current bet: " value={"$" + currentBet} />
 
-      <ButtonsContainer>
-        {coins.map((coin, index) => (
-          <Coin
-            value={coin}
-            key={index}
+        <ButtonsContainer>
+          {coins.map((coin, index) => (
+            <Coin
+              value={coin}
+              key={index}
+              disabled={
+                gameState !== GameState.betting ||
+                playerMoney < currentBet + coin
+              }
+              action={() => handleBet(coin)}
+            />
+          ))}
+        </ButtonsContainer>
+
+        <ButtonsContainer>
+          <GameButton
+            buttonText="Deal cards"
             disabled={
-              gameState !== GameState.betting || playerMoney < currentBet + coin
+              gameState !== GameState.betting ||
+              currentBet === 0 ||
+              playerMoney < currentBet
             }
-            action={() => handleBet(coin)}
+            action={handleBetAndDeal}
           />
-        ))}
-      </ButtonsContainer>
 
-      <ButtonsContainer>
-        <GameButton
-          buttonText="Deal cards"
-          disabled={
-            gameState !== GameState.betting ||
-            currentBet === 0 ||
-            playerMoney < currentBet
-          }
-          action={handleBetAndDeal}
-        />
-
-        <GameButton
-          buttonText="Clear Bet"
-          disabled={gameState !== GameState.betting || currentBet === 0}
-          action={handleResetBet}
-          bg="bg-[#FF0000]"
-        />
-      </ButtonsContainer>
-    </GameSection>
+          <GameButton
+            buttonText="Clear Bet"
+            disabled={gameState !== GameState.betting || currentBet === 0}
+            action={handleResetBet}
+            bg="bg-[#FF0000]"
+          />
+        </ButtonsContainer>
+      </GameSection>
+    </div>
   );
 }

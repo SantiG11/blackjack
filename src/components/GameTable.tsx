@@ -41,7 +41,7 @@ function GameTable() {
   } = useBlackjackGame();
 
   return (
-    <div className="flex flex-col justify-between  text-white bg-[#0a3c28] rounded-xl border-4 sm:border-8 border-[#2a1a12] shadow-2xl p-2 sm:p-6 md:p-4 relative  ">
+    <div className="flex flex-col flex-1 justify-around  md:min-h-50vh md:max-w-[1600px] md:max-h-[800px] md:h-[80vh] md:min-h-fit md:justify-start xl:gap-[5vh] min-h-[95vh] text-white bg-[#0a3c28] rounded-xl border-4 sm:border-8 border-[#2a1a12] shadow-2xl p-2 sm:p-6 md:p-4 relative ">
       {/*----------- Card Deck ----------- */}
       <CardDeck ref={deckRef} />
 
@@ -73,7 +73,7 @@ function GameTable() {
 
       {/*----------- Header ----------- */}
 
-      <header className="flex flex-col md:flex-row justify-between items-center  sm:mb-6 md:mb-8 ">
+      <header className="flex flex-row justify-between items-center  mb-4 md:mb-0 ">
         <h1 className="font-bold text-3xl ">Blackjack</h1>
 
         <PlayerMoneyControls
