@@ -41,7 +41,7 @@ function GameTable() {
   } = useBlackjackGame();
 
   return (
-    <div className="flex flex-col flex-1 justify-around  md:min-h-50vh md:max-w-[1600px] md:max-h-[800px] md:h-[80vh] md:min-h-fit md:justify-start xl:gap-[5vh] min-h-[95vh] text-white bg-[#0a3c28] rounded-xl border-4 sm:border-8 border-[#2a1a12] shadow-2xl p-2 sm:p-6 md:p-4 relative ">
+    <div className="flex flex-col flex-1 justify-around  min-h-[95vh] md:min-h-fit  md:min-h-50vh md:max-w-[1600px] md:max-h-[800px] md:h-[80vh]  2xl:justify-start 2xl:gap-10 text-white bg-[#0a3c28] rounded-xl border-4 sm:border-8 border-[#2a1a12] shadow-2xl p-2 sm:p-6 md:px-4 md:py-2 relative ">
       {/*----------- Card Deck ----------- */}
       <CardDeck ref={deckRef} />
 
@@ -67,13 +67,13 @@ function GameTable() {
         <GameMessage
           message="You must add money to play"
           action={handleAddMoney}
-          btnName="Add money (+500)"
+          btnName="Add $500"
         />
       )}
 
       {/*----------- Header ----------- */}
 
-      <header className="flex flex-row justify-between items-center  mb-4 md:mb-0 ">
+      <header className="flex flex-row justify-between items-center 2xl:m-2 mb-4 md:mb-0 ">
         <h1 className="font-bold text-3xl ">Blackjack</h1>
 
         <PlayerMoneyControls

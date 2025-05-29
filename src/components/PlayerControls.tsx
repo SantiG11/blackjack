@@ -22,19 +22,21 @@ export default function PlayerControls({
   const buttonDisabled = !isPlayerTurn || !isGamePlaying || playerBusted;
 
   return (
-    <ButtonsContainer>
-      <GameButton
-        buttonText="Hit"
-        disabled={buttonDisabled}
-        action={hitPlayer}
-      />
+    <div className="flex justify-center md:justify-start">
+      <ButtonsContainer>
+        <GameButton
+          buttonText="Hit"
+          disabled={buttonDisabled}
+          action={hitPlayer}
+        />
 
-      <GameButton
-        buttonText="Stand"
-        disabled={buttonDisabled}
-        action={handleStand}
-        bg="bg-[#FF0000]"
-      />
-    </ButtonsContainer>
+        <GameButton
+          buttonText="Stand"
+          disabled={buttonDisabled}
+          action={handleStand}
+          bg="bg-[#FF0000]"
+        />
+      </ButtonsContainer>
+    </div>
   );
 }

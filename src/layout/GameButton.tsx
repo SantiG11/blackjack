@@ -15,8 +15,8 @@ export default function GameButton({
     <button
       onClick={() => action()}
       disabled={disabled}
-      className={` ${bg}   text-white border border-[#0f5438] py-2 px-4  rounded-xl sm:px-8 text-xs sm:text-sm flex-1 sm:flex-none ${
-        disabled ? "opacity-50 " : "hover:cursor-pointer hover:bg-[#0c4830]"
+      className={` ${bg} text-white border border-[#0f5438] py-2 px-4 sm:px-8 text-xs font-bold w-32 sm:text-xs  sm:flex-none rounded-xl ${
+        disabled ? "opacity-50 " : "hover:cursor-pointer hover:opacity-80"
       }`}
     >
       {buttonText}
