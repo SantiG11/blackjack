@@ -50,16 +50,12 @@ function GameOutcome({
       case GameState.player_wins_score: // Assuming you added this state
         setTitle("Player wins!!");
         setWinner("Player");
-        setDetails(
-          `Player Score: ${playerScore}, Dealer Score: ${dealerScore}`
-        );
+        setDetails(`Player Score: ${playerScore} Dealer Score: ${dealerScore}`);
         break;
       case GameState.dealer_wins_score: // Assuming you added this state
         setTitle("Dealer wins!!");
         setWinner("Dealer");
-        setDetails(
-          `Dealer Score: ${dealerScore}, Player Score: ${playerScore}`
-        );
+        setDetails(`Dealer Score: ${dealerScore} Player Score: ${playerScore}`);
         break;
       case GameState.tie_score: // Assuming you added this state
         setTitle("Tie");
@@ -77,24 +73,30 @@ function GameOutcome({
   }, [gameState, playerScore, dealerScore]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-100">
+    <div className="fixed inset-0 flex items-center justify-center z-100 ">
       <div
-        className={`bg-[#1a1a1a]/80 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center z-100 w-3xs h-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+        className={`bg-[#1a1a1a]/80 backdrop-blur-2xl p-6 rounded-lg shadow-lg text-center z-100 w-3xs h-md absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
           winner === "Player" && "border-4 border-green-500"
         } ${winner === "Dealer" && "border-4 border-[#aa3c3c]"} ${
           winner === "Tie" && "border-4 border-gray-600"
         }`}
       >
         <h3
-          className={`text-2xl font-bold mb-4 ${
+          className={`text-2xl font-heading font-bold mb-4 ${
             winner === "Player" && " text-[#5caa7a]"
           }  ${winner === "Dealer" && " text-[#aa3c3c]"}`}
         >
           {title}
         </h3>
-        <p className="text-lg font-medium mb-6">{details}</p>
+        <p className="text-lg font-body font-bold text-balance mb-6">
+          {details}
+        </p>
 
-        <SecondaryButton buttonText="New Game" action={handleNewGame} />
+        <SecondaryButton
+          buttonText="New Game"
+          action={handleNewGame}
+          textSize="text-sm"
+        />
       </div>
     </div>
   );

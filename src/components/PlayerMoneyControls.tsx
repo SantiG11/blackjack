@@ -46,7 +46,7 @@ export default function PlayerMoneyControls({
           buttonText="Add $500"
           disabled={!showDropdown}
         />
-        <SecondaryButton action={handleResetMoney} buttonText="Reset money" />
+        <SecondaryButton action={handleResetMoney} buttonText="Reset balance" />
       </Dropdown>
     </div>
   );

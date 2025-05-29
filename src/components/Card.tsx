@@ -25,7 +25,7 @@ export default function Card({ suit, value, hidden = false }: CardType) {
     : "text-[#1a1a1a]";
 
   return hidden ? (
-    <div className="aspect-[5/7] w-20 sm:w-24 lg:w-26 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#333333] shadow-xl flex items-center justify-center p-1 transform transition-transform hover:rotate-1 hover:scale-105">
+    <div className="aspect-[5/7]  w-20 sm:w-24 lg:w-26 rounded-lg bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#333333] shadow-xl flex items-center justify-center p-1 transform transition-transform hover:rotate-1 hover:scale-105">
       <div className="w-full h-full rounded bg-[#0f0f0f] flex items-center justify-center">
         <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16">
           <div className="w-full h-full rounded-full border-4 border-dashed border-[#333333] animate-spin-slow"></div>
@@ -33,9 +33,9 @@ export default function Card({ suit, value, hidden = false }: CardType) {
       </div>
     </div>
   ) : (
-    <div className="aspect-[5/7] w-20 sm:w-24 lg:w-26 rounded-lg bg-[#f8f8f8] shadow-xl flex flex-col p-2 sm:p-3 transform transition-transform hover:rotate-1 hover:scale-105 border border-[#e0e0e0]">
+    <div className="font-heading aspect-[5/7] w-20 sm:w-24 lg:w-26 rounded-lg bg-[#f8f8f8] shadow-xl flex flex-col p-2 sm:p-3 transform transition-transform hover:rotate-1 hover:scale-105 border border-[#e0e0e0]">
       <div className="flex justify-between items-start">
-        <div className={`text-md sm:text-lg font-bold ${suitColor}`}>
+        <div className={`text-md sm:text-lg font-bold  ${suitColor}`}>
           {value}
         </div>
         <div className={`text-md sm:text-lg ${suitColor}`}>

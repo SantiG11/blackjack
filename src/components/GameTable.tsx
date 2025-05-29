@@ -74,7 +74,7 @@ function GameTable() {
       {/*----------- Header ----------- */}
 
       <header className="flex flex-row justify-between items-center 2xl:m-2 mb-4 md:mb-0 ">
-        <h1 className="font-bold text-3xl ">Blackjack</h1>
+        <h1 className="font-heading font-bold text-4xl ">Blackjack</h1>
 
         <PlayerMoneyControls
           playerMoney={playerMoney}
