@@ -41,7 +41,7 @@ function GameTable() {
   } = useBlackjackGame();
 
   return (
-    <div className="flex flex-col flex-1 justify-around  min-h-[95vh] md:min-h-fit  md:min-h-50vh md:max-w-[1600px] md:max-h-[800px] md:h-[80vh]  2xl:justify-start 2xl:gap-10 text-white bg-[#0a3c28] rounded-xl border-4 sm:border-8 border-[#2a1a12] shadow-2xl p-2 sm:p-6 md:px-4 md:py-2 relative ">
+    <div className="flex flex-col flex-1 shrink-0  justify-around  min-h-[95vh] md:max-w-[1600px] md:max-h-[800px] md:h-[80vh] md:min-h-[560px]  2xl:justify-start 2xl:gap-10 2xl:min-h-[660px] text-white bg-[#0a3c28] rounded-xl border-4 sm:border-8 border-[#2a1a12] shadow-2xl p-2 sm:p-6 md:px-4 md:py-2 relative ">
       {/*----------- Card Deck ----------- */}
       <CardDeck ref={deckRef} />
 
