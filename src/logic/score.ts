@@ -1,4 +1,4 @@
-import { CardType } from "../components/Card";
+import { CardType } from "../utils/GameTypes";
 
 const calculateTotal = (hand: CardType[]) => {
   let totalScore = 0;
