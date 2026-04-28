@@ -1,6 +1,6 @@
 # ♠️ Blackjack Game Online | Master Your Strategy
 
-[![Live Demo] [Change to deployed URL]]
+[View the project](https://blackjack-taupe-beta.vercel.app/)
 
 ## Project Overview
 
@@ -12,7 +12,7 @@ Experience the thrill of outsmarting the dealer in a beautifully designed, respo
 
 Experience the game live and test your skills:
 
-👉 **[Play Blackjack Online Here!]( [Change to deployed URL])**
+👉 **[Play Blackjack Online Here!](https://blackjack-taupe-beta.vercel.app/)**
 
 ## Features
 
@@ -68,16 +68,6 @@ To get a local copy of the project up and running on your machine for developmen
 5.  **Results:** The game will determine the winner, update your balance, and prompt you to play another round.
 6.  **Reset Money:** If you run out of money, a "Reset Money" option will appear to allow you to continue playing.
 
-## Screenshots
-
-### Desktop View
-
-![Desktop Screenshot of Blackjack Game] [Change to deployed image URL path ]
-
-### Mobile View
-
-![Mobile Screenshot of Blackjack Game][Change to deployed image URL path ]
-
 ## Challenges & Learnings
 
 Developing this Blackjack game provided invaluable experience and presented several interesting challenges, leading to significant learning outcomes:
@@ -90,7 +80,7 @@ Developing this Blackjack game provided invaluable experience and presented seve
 
 ## Future Enhancements
 
-I am committed to continuously improving this project and expanding my skills. Upcoming enhancements include:
+Upcoming enhancements include:
 
 - **Comprehensive Testing:** Implementing unit and integration tests using **Jest** and **React Testing Library** to ensure the reliability and correctness of game logic and component behavior.
 - **Keyboard usage:** The player will be able to use the keyboard to play the game.

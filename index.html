@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en" class="bg-black min-h-screen flex items-center justify-center">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Santiago Gimenez" />
     <meta
       name="description"
-      property="og:description"
-      content="Play a realistic free online Casino 21 game! Master your strategy, hit, stand, double down, and split to beat the dealer. Experience the thrill of casino 21 for free."
+      content="Play free online Blackjack with smooth betting controls, dealer rules, real-time scores, and a responsive casino table built with React and TypeScript."
     />
+    <link rel="canonical" href="https://blackjack-taupe-beta.vercel.app/" />
 
-    <title>Blackjack Game Online | Play Free Casino 21</title>
+    <title>Play Blackjack Online Free | React Casino 21 Game</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,51 +20,120 @@
       rel="stylesheet"
     />
 
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#050505" />
     <link
       rel="icon"
       type="image/png"
-      href="/public/favicon/favicon-96x96.png"
+      href="/favicon/favicon-96x96.png"
       sizes="96x96"
     />
-    <link rel="icon" type="image/svg+xml" href="/public/favicon/favicon.svg" />
-    <link rel="shortcut icon" href="/public/favicon/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="/public/favicon/apple-touch-icon.png"
+      href="/favicon/apple-touch-icon.png"
     />
     <meta name="apple-mobile-web-app-title" content="Blackjack" />
-    <link rel="manifest" href="/public/favicon/site.webmanifest" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
 
     <link href="/src/index.css" rel="stylesheet" />
 
     <meta
       property="og:title"
-      content="Blackjack Game Online | Play Free Casino 21"
+      content="Play Blackjack Online Free | React Casino 21 Game"
+    />
+    <meta
+      property="og:description"
+      content="Practice Blackjack strategy with a polished free casino table, virtual betting, dealer turns, live scores, and responsive gameplay."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://blackjack-taupe-beta.vercel.app/" />
+    <meta property="og:site_name" content="Blackjack Online" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:image" content="/blackjack-screenshot.png" />
+    <meta
+      property="og:image"
+      content="https://blackjack-taupe-beta.vercel.app/images/blackjack-screenshot.png"
+    />
+    <meta property="og:image:type" content="image/png" />
     <meta
       property="og:image:alt"
-      content="Screenshot of an online Blackjack game"
+      content="A responsive online Blackjack table with cards, chips, scores, and player controls"
     />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Blackjack Game Online | Play Free Casino 21"
+      content="Play Blackjack Online Free | React Casino 21 Game"
     />
     <meta
       name="twitter:description"
-      content="Play a realistic free online Casino 21 game! Master your strategy, hit, stand, double down, and split to beat the dealer. Experience the thrill of casino 21 for free."
+      content="Practice Blackjack strategy with a polished free casino table, virtual betting, dealer turns, live scores, and responsive gameplay."
     />
-    <meta name="twitter:image" content="/blackjack-screenshot.png" />
+    <meta
+      name="twitter:image"
+      content="https://blackjack-taupe-beta.vercel.app/images/blackjack-screenshot.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="A responsive online Blackjack table with cards, chips, scores, and player controls"
+    />
     <meta name="twitter:creator" content="@SantiG2911" />
     <meta name="twitter:site" content="@SantiG2911" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Blackjack Online",
+        "alternateName": "Casino 21",
+        "url": "https://blackjack-taupe-beta.vercel.app/",
+        "image": "https://blackjack-taupe-beta.vercel.app/images/blackjack-screenshot.png",
+        "description": "A free online Blackjack game with virtual betting, dealer rules, real-time scoring, and responsive React gameplay.",
+        "applicationCategory": "Game",
+        "operatingSystem": "Web browser",
+        "genre": ["Card game", "Casino game"],
+        "playMode": "SinglePlayer",
+        "author": {
+          "@type": "Person",
+          "name": "Santiago Gimenez"
+        }
+      }
+    </script>
   </head>
-  <body>
+  <body class="bg-black min-h-screen">
+    <noscript>
+      <main
+        style="
+          min-height: 100vh;
+          display: grid;
+          place-items: center;
+          padding: 24px;
+          color: #f7f7f7;
+          background: #050505;
+          font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+            sans-serif;
+          text-align: center;
+        "
+      >
+        <section style="max-width: 640px">
+          <img
+            src="/images/blackjack-screenshot.png"
+            alt="A responsive online Blackjack table with cards, chips, scores, and player controls"
+            style="
+              width: min(100%, 560px);
+              border-radius: 8px;
+              margin-bottom: 24px;
+            "
+          />
+          <h1 style="margin: 0 0 12px; font-size: 2rem">Play Blackjack Online</h1>
+          <p style="margin: 0; line-height: 1.6; color: #d9d9d9">
+            Enable JavaScript to play this free Blackjack game with betting
+            controls, dealer turns, and live scoring.
+          </p>
+        </section>
+      </main>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
