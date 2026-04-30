@@ -1,89 +1,128 @@
-# ♠️ Blackjack Game Online | Master Your Strategy
+# Blackjack
 
-[View the project](https://blackjack-taupe-beta.vercel.app/)
+A simple Blackjack game built with React, TypeScript, Vite, and Tailwind CSS.
 
-## Project Overview
+The project simulates a classic Blackjack table where users can add virtual money, place bets, receive cards, and play against the dealer. The game does not include advanced Blackjack actions such as split, double down, insurance, or surrender.
 
-Welcome to Blackjack Game Online, a sophisticated and interactive web-based simulation of the classic casino card game, Twenty-One. This project was developed as a hands-on learning experience and a core addition to my portfolio, showcasing my proficiency in modern front-end development technologies and best practices.
-
-Experience the thrill of outsmarting the dealer in a beautifully designed, responsive environment!
+> This project uses virtual money only. It is a game simulation and does not involve real gambling or real payments.
 
 ## Live Demo
 
-Experience the game live and test your skills:
+[View the project](https://blackjack-taupe-beta.vercel.app/)
 
-👉 **[Play Blackjack Online Here!](https://blackjack-taupe-beta.vercel.app/)**
+## Screenshot
+
+![Blackjack screenshot](./public/images/blackjack-screenshot.png)
 
 ## Features
 
-This Blackjack game offers a robust set of features designed for a engaging and intuitive user experience:
-
-- **Interactive Gameplay:** Full implementation of core Blackjack rules including Hit, Stand.
-- **Dynamic Betting System:** Place bets using virtual chips, with accurate tracking of player's balance and payouts.
-- **Intelligent Dealer AI:** Dealer adheres to standard casino rules (hits on 16 or less, stands on 17 or more).
-- **Clear Game State:** Real-time display of player and dealer scores, game messages (Blackjack, Bust, Win, Lose, Push), and current bet.
-- **Responsive Design:** Seamlessly adapts to various screen sizes, offering an optimal playing experience on desktop, tablet, and mobile devices.
-- **Custom Theming:** A unique, casino-inspired color palette utilizing modern Oklch values for perceptually uniform colors, paired with custom typography.
-- **Enhanced User Interface:** Intuitive controls and clear visual feedback for game actions.
-- **Basic SEO & Social Sharing:** Configured with essential meta tags (`<title>`, `<meta name="description">`, Open Graph, Twitter Cards) for improved discoverability and compelling social media previews.
-- **Custom Favicon:** A thematic card suit icon for brand recognition in browser tabs.
-
-## Technologies Used
-
-This project leverages a modern and robust front-end stack:
-
-- **React:** A declarative, component-based JavaScript library for building user interfaces.
-- **TypeScript:** A superset of JavaScript that adds static typing, improving code quality and maintainability.
-- **Tailwind CSS:** A highly customizable, utility-first CSS framework for rapid UI development, configured with custom colors (Oklch) and font families.
-- **Vite:** A fast build tool that significantly improves the development experience for modern web projects.
-- **npm / Yarn:** For package management.
-
-## Installation & Local Setup
-
-To get a local copy of the project up and running on your machine for development or testing, follow these steps:
-
-1.  **Clone the repository:**
-    ```bash
-    git clone https://github.com/SantiG11/blackjack.git
-    ```
-2.  **Install dependencies:**
-    ```bash
-    npm install  # or yarn install
-    ```
-3.  **Start the development server:**
-    ```bash
-    npm run dev  # or yarn dev
-    ```
-4.  **Open your browser:**
-    The application will typically be available at `http://localhost:5173` (or the port specified in your terminal).
+- Add virtual money to start playing.
+- Place bets using predefined chip values.
+- Deal cards and play a classic Blackjack round.
+- Use basic player actions: hit and stand.
+- Dealer plays automatically after the player's turn.
+- Dealer stands on 17 or higher.
+- Automatic score calculation, including Ace handling.
+- Blackjack, bust, win, lose, and tie outcomes.
+- Balance updates after each round.
+- Player money is saved in local storage.
+- Responsive casino-style interface.
 
 ## How to Play
 
-1.  **Place Your Bet:** Use the chip buttons to select your desired bet amount.
-2.  **Deal Cards:** Click the "Deal" button to start a new round.
-3.  **Player's Turn:**
-    - **Hit:** Take another card.
-    - **Stand:** End your turn.
-4.  **Dealer's Turn:** After your turn, the dealer will reveal their hidden card and hit or stand based on standard rules.
-5.  **Results:** The game will determine the winner, update your balance, and prompt you to play another round.
-6.  **Reset Money:** If you run out of money, a "Reset Money" option will appear to allow you to continue playing.
+1. Add virtual money if your balance is empty.
+2. Select one or more chips to place a bet.
+3. Click **Deal cards** to start the round.
+4. Use **Hit** to draw another card.
+5. Use **Stand** to end your turn.
+6. The dealer then plays automatically.
+7. The result is shown and the balance is updated.
+8. Start a new round and keep playing.
 
-## Challenges & Learnings
+## Game Rules Implemented
 
-Developing this Blackjack game provided invaluable experience and presented several interesting challenges, leading to significant learning outcomes:
+- The goal is to get as close as possible to 21 without going over.
+- Number cards keep their value.
+- J, Q, and K are worth 10 points.
+- Aces can count as 11 or 1, depending on the hand.
+- A standard win pays 1:1.
+- A Blackjack win pays 3:2.
+- A tie returns the original bet.
+- If the player goes over 21, the player loses the bet.
+- The dealer keeps drawing cards until reaching at least 17.
 
-- **Complex State Management with React Hooks:** Managing the intricate state of a card game (player hands, dealer hand, deck, bets, game phase, scores) required careful planning. I leveraged custom React Hooks (e.g., `useBlackjackGame`).
-- **Dynamic Tailwind CSS Class Generation:** Understanding how Tailwind's JIT compiler processes dynamically generated class names (e.g., for custom Oklch colors or specific chip styles) was crucial. I ensured the `tailwind.config.js` `content` array correctly scanned relevant files to allow for dynamic styling based on game logic.
-- **Responsive UI Design:** Adapting the game's layout and controls to provide an optimal experience across a wide range of devices (from large desktops to small mobile phones) was a primary focus, extensively utilizing Tailwind's responsive utility classes.
-- **Implementing Core Game Logic:** Translating nuanced Blackjack rules (like splits, double downs, and specific dealer behavior) into robust and bug-free code required meticulous attention to detail and careful logical structuring.
-- **Front-End SEO Fundamentals:** Gained practical experience in configuring essential meta tags in `index.html` (Title, Meta Description, Open Graph, Twitter Cards) to enhance search engine visibility and improve social media sharing previews.
+## Technologies Used
 
-## Future Enhancements
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- ESLint
+- Local Storage
 
-Upcoming enhancements include:
+## Project Structure
 
-- **Comprehensive Testing:** Implementing unit and integration tests using **Jest** and **React Testing Library** to ensure the reliability and correctness of game logic and component behavior.
-- **Keyboard usage:** The player will be able to use the keyboard to play the game.
-- **Animations:** Adding subtle animations for card dealing, chip betting, and score updates to further enhance the game's visual appeal and user experience.
-- **Sound Effects:** Incorporating appropriate sound cues for key game events (e.g., card dealt, win/lose) to boost immersion.
-- **Advanced Game Features:** Exploring options like split, double down, insurance, surrender, or multi-player capabilities.
+```txt
+src/
+├── components/       # Main game UI components
+├── hooks/            # Custom hook with Blackjack state and logic
+├── layout/           # Reusable layout and button components
+├── logic/            # Score calculation logic
+├── utils/            # Game constants and TypeScript types
+├── App.tsx           # Main application component
+└── main.tsx          # React entry point
+```
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/SantiG11/blackjack.git
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the development server
+
+```bash
+npm run dev
+```
+
+### 4. Build for production
+
+```bash
+npm run build
+```
+
+### 5. Preview the production build
+
+```bash
+npm run preview
+```
+
+## Available Scripts
+
+```bash
+npm run dev      # Start the development server
+npm run build    # Create a production build
+npm run lint     # Run ESLint
+npm run preview  # Preview the production build locally
+```
+
+## Future Improvements
+
+- Add keyboard controls.
+- Add card dealing animations.
+- Add sound effects.
+- Add more advanced Blackjack actions such as split, double down, etc.
+- Add game statistics, such as wins, losses, and total profit.
+- Add unit tests for the score and game result logic.
+
+## Author
+
+Created by [Santiago G.](https://github.com/SantiG11)
